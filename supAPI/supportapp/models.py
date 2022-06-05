@@ -3,6 +3,9 @@ from django.db import models
 
 
 class AppUser(AbstractUser):
+
+    """Модель наших пользователей"""
+
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
@@ -12,6 +15,8 @@ class AppUser(AbstractUser):
 
 
 class TicketQueue(models.Model):
+
+    """Модель с очередями тикетов"""
     title = models.CharField(
         max_length=25,
         verbose_name='Состояние'
@@ -26,6 +31,8 @@ class TicketQueue(models.Model):
 
 
 class Ticket(models.Model):
+
+    """Модль тикетов"""
     issue = models.TextField(
         blank=False,
         verbose_name='Проблема',
@@ -41,14 +48,13 @@ class Ticket(models.Model):
         verbose_name='Автор',
         related_name='ticket_author'
     )
-    queue = models.ForeignKey(
+    queue = models.ForeignKey(  # В каком состояннии тикет находится
         'TicketQueue',
         on_delete=models.DO_NOTHING,
         verbose_name='Состояние'
     )
-    answers = models.ForeignKey(
+    answers = models.ManyToManyField(  # Все сообщения в тикете
         'Messages',
-        on_delete=models.DO_NOTHING,
         verbose_name='Ответы'
     )
 
@@ -61,6 +67,8 @@ class Ticket(models.Model):
 
 
 class Messages(models.Model):
+
+    """Ответы пользователей и саппортов"""
     author = models.ForeignKey(
         'AppUser',
         verbose_name='Автор',
