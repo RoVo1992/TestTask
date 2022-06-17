@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from supportapp import views
 from rest_framework import routers
 
@@ -23,5 +23,8 @@ routers.register(r'ticket', views.TicketViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
     path('api/v1/', include(routers.urls)),
+    re_path(r'^djoserauth/', include('djoser.urls')),
+    re_path(r'^djoserauth/', include('djoser.urls.authtoken'))
 ]

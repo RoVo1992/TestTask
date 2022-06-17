@@ -32,7 +32,7 @@ class TicketQueue(models.Model):
 
 class Ticket(models.Model):
 
-    """Модль тикетов"""
+    """Модель тикетов"""
     issue = models.TextField(
         blank=False,
         verbose_name='Проблема',
@@ -81,7 +81,7 @@ class Messages(models.Model):
     )
     message = models.TextField(
         blank=False,
-        verbose_name='Текст сообшения'
+        verbose_name='Текст сообщения'
     )
 
     class Meta:

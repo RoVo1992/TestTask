@@ -6,6 +6,6 @@ from .serializers import *
 
 
 class TicketViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
